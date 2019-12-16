@@ -17,6 +17,7 @@ function randomIntegerFromInterval(min, max) {
   return Math.floor(rand);
 }
 let isActive = false;
+let intervalId;
 function setBodyColor() {
   refs.body.style.backgroundColor =    colors[randomIntegerFromInterval(0, colors.length - 1)];
 }
@@ -24,8 +25,12 @@ function setBodyColor() {
 function handleStartBtn() {
   if (!isActive) {
     isActive = true;
-    setInterval(setBodyColor, 1000);
+    intervalId = setInterval(setBodyColor, 1000);
   }
 }
-
+function handleStopBtn() {
+  clearInterval(intervalId);
+  isActive = false;
+}
 refs.startBtn.addEventListener('click', handleStartBtn);
+refs.stopBtn.addEventListener('click', handleStopBtn);
